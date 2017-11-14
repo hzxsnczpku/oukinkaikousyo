@@ -54,11 +54,11 @@ Below is the data derived from my training process.
 You should first download the dataset from the link given above. The dataset is stored in the binary form, but it really takes some time to process the data. So I implement a numpy version for data loading. When you first run the code, make sure that you set "first_run" to be True. For example, you can run the following code to train a ResNet Model,
 
 ```
-python --model ResNet --first_run True
+python main.py --model ResNet --first_run True
 ```
 
 After the first run, some .npy formed files will be created. When you run the model for the second time or more, simply use the following code,
 
 ```
-python --model ResNet
+python main.py --model ResNet
 ```
