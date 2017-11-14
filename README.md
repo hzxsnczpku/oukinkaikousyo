@@ -41,5 +41,5 @@ Below is the data derived from my training process.
 
 ### Vgg19
 <div align = 'center'>
-<img src = "https://raw.githubusercontent.com/hzxsnczpku/oukinkaikousyo/master/images/Vgg19.png" width='200px'> 
+<img src = "https://raw.githubusercontent.com/hzxsnczpku/oukinkaikousyo/master/images/Vgg19.png" width='600px'> 
 </div>
