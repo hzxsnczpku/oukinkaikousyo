@@ -41,5 +41,10 @@ Below is the data derived from my training process.
 
 ### Vgg19
 <div align = 'center'>
-<img src = "https://raw.githubusercontent.com/hzxsnczpku/oukinkaikousyo/master/images/Vgg19.png" width='600px'> 
+<img src = "https://raw.githubusercontent.com/hzxsnczpku/oukinkaikousyo/master/images/Vgg19.png" width='600px'>
+</div>
+
+### ResNet
+<div align = 'center'>
+<img src = "https://raw.githubusercontent.com/hzxsnczpku/oukinkaikousyo/master/images/ResNet.png" width='600px'>
 </div>
