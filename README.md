@@ -30,7 +30,7 @@ I have implemented the following models:
 
 | model | training accuracy | training loss | test accuracy | test loss | trained model
 | :----: | :-----: | :----: | :----: | :----: | :----: |
-| The diy model | 99.97% | 0.9100 | 78.81% | Not Recorded | pass |
+| The diy model | 99.97% | 0.9100 | 78.81% | Not Recorded | https://pan.baidu.com/s/1o7NhJ1w |
 | Vgg19 | 99.75% | 0.6149 | 91.75% | 1.1425 | https://pan.baidu.com/s/1bVDB34 |
 | ResNet | 99.99% | 0.1433 | 96.67% | 0.3012 | https://pan.baidu.com/s/1dEBoKZR |
 | DenseNet | under experiment | under experiment | under experiment | under experiment | pass |
