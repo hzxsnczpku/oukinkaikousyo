@@ -34,6 +34,7 @@ I have implemented the following models:
 | Vgg19 | 99.75% | 0.6149 | 91.75% | 1.1425 | https://pan.baidu.com/s/1bVDB34 |
 | ResNet | 99.99% | 0.1433 | 96.67% | 0.3012 | https://pan.baidu.com/s/1dEBoKZR |
 | DenseNet | under experiment | under experiment | under experiment | under experiment | pass |
+| ResNext | under experiment | under experiment | under experiment | under experiment | pass |
 
 ## Training Process
 
@@ -48,3 +49,16 @@ Below is the data derived from my training process.
 <div align = 'center'>
 <img src = "https://raw.githubusercontent.com/hzxsnczpku/oukinkaikousyo/master/images/ResNet.png" width='600px'>
 </div>
+
+# How to Reproduce
+You should first download the dataset from the link given above. The dataset is stored in the binary form, but it really takes some time to process the data. So I implement a numpy version for data loading. When you first run the code, make sure that you set "first_run" to be True. For example, you can run the following code to train a ResNet Model,
+
+```
+python --model ResNet --first_run True
+```
+
+After the first run, some .npy formed files will be created. When you run the model for the second time or more, simply use the following code,
+
+```
+python --model ResNet
+```

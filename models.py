@@ -1,19 +1,19 @@
 import math
 
-from numpy import concatenate
 from tensorflow.contrib.keras.python import keras
 from tensorflow.contrib.keras.python.keras import optimizers
 from tensorflow.contrib.keras.python.keras import regularizers
 from tensorflow.contrib.keras.python.keras.callbacks import LearningRateScheduler, TensorBoard
 from tensorflow.contrib.keras.python.keras.initializers import he_normal
 from tensorflow.contrib.keras.python.keras.layers import Conv2D, MaxPooling2D, Dense, Dropout, Activation, Flatten, \
-    Input, add, GlobalAveragePooling2D, AveragePooling2D, Lambda, SeparableConv2D, GlobalMaxPooling2D
+    Input, add, GlobalAveragePooling2D, AveragePooling2D, Lambda, SeparableConv2D, GlobalMaxPooling2D, concatenate
 from tensorflow.contrib.keras.python.keras.layers.normalization import BatchNormalization
 from tensorflow.contrib.keras.python.keras.models import Model
 from tensorflow.contrib.keras.python.keras.models import Sequential
 from tensorflow.contrib.keras.python.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.contrib.keras.python.keras.utils.data_utils import get_file
-keras.applications
+
+
 class NNModel:
     def set_data(self, data):
         raise NotImplementedError
