@@ -7,14 +7,13 @@ from tensorflow.contrib.keras.python.keras import regularizers
 from tensorflow.contrib.keras.python.keras.callbacks import LearningRateScheduler, TensorBoard
 from tensorflow.contrib.keras.python.keras.initializers import he_normal
 from tensorflow.contrib.keras.python.keras.layers import Conv2D, MaxPooling2D, Dense, Dropout, Activation, Flatten, \
-    Input, add, GlobalAveragePooling2D, AveragePooling2D, Lambda
+    Input, add, GlobalAveragePooling2D, AveragePooling2D, Lambda, SeparableConv2D, GlobalMaxPooling2D
 from tensorflow.contrib.keras.python.keras.layers.normalization import BatchNormalization
 from tensorflow.contrib.keras.python.keras.models import Model
 from tensorflow.contrib.keras.python.keras.models import Sequential
 from tensorflow.contrib.keras.python.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.contrib.keras.python.keras.utils.data_utils import get_file
-
-
+keras.applications
 class NNModel:
     def set_data(self, data):
         raise NotImplementedError
@@ -613,6 +612,176 @@ class ResNext(NNModel):
         self.model.fit_generator(datagen.flow(x_train, y_train, batch_size=batch_size), steps_per_epoch=iterations,
                                  epochs=epochs, callbacks=cbks, validation_data=(x_test, y_test))
         self.model.save('resnext.h5')
+
+    def evaluate(self):
+        (x_train, y_train), (x_test, y_test) = self.data
+        self.model.load_weights('vgg19.h5', by_name=True)
+        self.model.load_weights('resnext.h5', by_name=True)
+        loss, acc = self.model.evaluate(x=x_test[:512, :, :, :], y=y_test[:512], batch_size=64, verbose=1)
+        print('test_loss:', loss, 'test_acc:', acc)
+
+
+class Xception(NNModel):
+    def __init__(self, data, load_model=False):
+        TF_WEIGHTS_PATH_NO_TOP = 'https://github.com/fchollet/deep-learning-models/releases/download/v0.4/xception_weights_tf_dim_ordering_tf_kernels_notop.h5'
+        img_rows, img_cols = 31, 31
+        img_channels = 3
+        weight_decay = 0.0005
+        self.classes_num = 1311
+        self.data = self.set_data(data)
+
+        img_input = Input(shape=(img_rows, img_cols, img_channels))
+        x = Conv2D(32, (3, 3), strides=(2, 2), use_bias=False, name='block1_conv1')(img_input)
+        x = BatchNormalization(name='block1_conv1_bn')(x)
+        x = Activation('relu', name='block1_conv1_act')(x)
+        x = Conv2D(64, (3, 3), use_bias=False, name='block1_conv2')(x)
+        x = BatchNormalization(name='block1_conv2_bn')(x)
+        x = Activation('relu', name='block1_conv2_act')(x)
+
+        residual = Conv2D(128, (1, 1), strides=(2, 2),
+                          padding='same', use_bias=False)(x)
+        residual = BatchNormalization()(residual)
+
+        x = SeparableConv2D(128, (3, 3), padding='same', use_bias=False, name='block2_sepconv1')(x)
+        x = BatchNormalization(name='block2_sepconv1_bn')(x)
+        x = Activation('relu', name='block2_sepconv2_act')(x)
+        x = SeparableConv2D(128, (3, 3), padding='same', use_bias=False, name='block2_sepconv2')(x)
+        x = BatchNormalization(name='block2_sepconv2_bn')(x)
+
+        x = MaxPooling2D((3, 3), strides=(2, 2), padding='same', name='block2_pool')(x)
+        x = add([x, residual])
+
+        residual = Conv2D(256, (1, 1), strides=(2, 2),
+                          padding='same', use_bias=False)(x)
+        residual = BatchNormalization()(residual)
+
+        x = Activation('relu', name='block3_sepconv1_act')(x)
+        x = SeparableConv2D(256, (3, 3), padding='same', use_bias=False, name='block3_sepconv1')(x)
+        x = BatchNormalization(name='block3_sepconv1_bn')(x)
+        x = Activation('relu', name='block3_sepconv2_act')(x)
+        x = SeparableConv2D(256, (3, 3), padding='same', use_bias=False, name='block3_sepconv2')(x)
+        x = BatchNormalization(name='block3_sepconv2_bn')(x)
+
+        x = MaxPooling2D((3, 3), strides=(2, 2), padding='same', name='block3_pool')(x)
+        x = add([x, residual])
+
+        residual = Conv2D(728, (1, 1), strides=(2, 2),
+                          padding='same', use_bias=False)(x)
+        residual = BatchNormalization()(residual)
+
+        x = Activation('relu', name='block4_sepconv1_act')(x)
+        x = SeparableConv2D(728, (3, 3), padding='same', use_bias=False, name='block4_sepconv1')(x)
+        x = BatchNormalization(name='block4_sepconv1_bn')(x)
+        x = Activation('relu', name='block4_sepconv2_act')(x)
+        x = SeparableConv2D(728, (3, 3), padding='same', use_bias=False, name='block4_sepconv2')(x)
+        x = BatchNormalization(name='block4_sepconv2_bn')(x)
+
+        x = MaxPooling2D((3, 3), strides=(2, 2), padding='same', name='block4_pool')(x)
+        x = add([x, residual])
+
+        for i in range(8):
+            residual = x
+            prefix = 'block' + str(i + 5)
+
+            x = Activation('relu', name=prefix + '_sepconv1_act')(x)
+            x = SeparableConv2D(728, (3, 3), padding='same', use_bias=False, name=prefix + '_sepconv1')(x)
+            x = BatchNormalization(name=prefix + '_sepconv1_bn')(x)
+            x = Activation('relu', name=prefix + '_sepconv2_act')(x)
+            x = SeparableConv2D(728, (3, 3), padding='same', use_bias=False, name=prefix + '_sepconv2')(x)
+            x = BatchNormalization(name=prefix + '_sepconv2_bn')(x)
+            x = Activation('relu', name=prefix + '_sepconv3_act')(x)
+            x = SeparableConv2D(728, (3, 3), padding='same', use_bias=False, name=prefix + '_sepconv3')(x)
+            x = BatchNormalization(name=prefix + '_sepconv3_bn')(x)
+
+            x = add([x, residual])
+
+        residual = Conv2D(1024, (1, 1), strides=(2, 2),
+                          padding='same', use_bias=False)(x)
+        residual = BatchNormalization()(residual)
+
+        x = Activation('relu', name='block13_sepconv1_act')(x)
+        x = SeparableConv2D(728, (3, 3), padding='same', use_bias=False, name='block13_sepconv1')(x)
+        x = BatchNormalization(name='block13_sepconv1_bn')(x)
+        x = Activation('relu', name='block13_sepconv2_act')(x)
+        x = SeparableConv2D(1024, (3, 3), padding='same', use_bias=False, name='block13_sepconv2')(x)
+        x = BatchNormalization(name='block13_sepconv2_bn')(x)
+
+        x = MaxPooling2D((3, 3), strides=(2, 2), padding='same', name='block13_pool')(x)
+        x = add([x, residual])
+
+        x = SeparableConv2D(1536, (3, 3), padding='same', use_bias=False, name='block14_sepconv1')(x)
+        x = BatchNormalization(name='block14_sepconv1_bn')(x)
+        x = Activation('relu', name='block14_sepconv1_act')(x)
+
+        x = SeparableConv2D(2048, (3, 3), padding='same', use_bias=False, name='block14_sepconv2')(x)
+        x = BatchNormalization(name='block14_sepconv2_bn')(x)
+        x = Activation('relu', name='block14_sepconv2_act')(x)
+
+        x = GlobalMaxPooling2D()(x)
+
+        x = Dense(self.classes_num, activation='softmax', kernel_initializer=he_normal(),
+              kernel_regularizer=regularizers.l2(weight_decay))(x)
+
+        self.model = Model(img_input, x, name='xception')
+        self.model.summary()
+        if not load_model:
+            weights_path = get_file(
+                'xception_weights_tf_dim_ordering_tf_kernels_notop.h5',
+                TF_WEIGHTS_PATH_NO_TOP, cache_subdir='models')
+            self.model.load_weights(weights_path)
+        else:
+            self.model.load_weights('xception.h5')
+
+        sgd = optimizers.SGD(lr=.1, momentum=0.9, nesterov=True)
+        self.model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
+
+    def set_data(self, data):
+        (x_train, y_train), (x_test, y_test) = data
+        y_train = keras.utils.to_categorical(y_train, self.classes_num)
+        y_test = keras.utils.to_categorical(y_test, self.classes_num)
+        x_train = x_train.astype('float32')
+        x_test = x_test.astype('float32')
+
+        # data preprocessing
+        x_train[:, :, :, 0] = (x_train[:, :, :, 0] - 123.680)
+        x_train[:, :, :, 1] = (x_train[:, :, :, 1] - 116.779)
+        x_train[:, :, :, 2] = (x_train[:, :, :, 2] - 103.939)
+        x_test[:, :, :, 0] = (x_test[:, :, :, 0] - 123.680)
+        x_test[:, :, :, 1] = (x_test[:, :, :, 1] - 116.779)
+        x_test[:, :, :, 2] = (x_test[:, :, :, 2] - 103.939)
+
+        return (x_train, y_train), (x_test, y_test)
+
+    def train(self):
+        batch_size = 120  # 64 or 32 or other
+        epochs = 250
+        iterations = 417
+
+        def scheduler(epoch):
+            if epoch <= 75:
+                return 0.05
+            if epoch <= 150:
+                return 0.005
+            if epoch <= 210:
+                return 0.0005
+            return 0.0001
+
+        tb_cb = TensorBoard(log_dir='./resnext/', histogram_freq=0)
+        change_lr = LearningRateScheduler(scheduler)
+        cbks = [change_lr, tb_cb]
+        (x_train, y_train), (x_test, y_test) = self.data
+
+        # set data augmentation
+        print('Using real-time data augmentation.')
+        datagen = ImageDataGenerator(horizontal_flip=True, width_shift_range=0.125, height_shift_range=0.125,
+                                     fill_mode='constant', cval=0.)
+
+        datagen.fit(x_train)
+
+        # start training
+        self.model.fit_generator(datagen.flow(x_train, y_train, batch_size=batch_size), steps_per_epoch=iterations,
+                                 epochs=epochs, callbacks=cbks, validation_data=(x_test, y_test))
+        self.model.save('xception.h5')
 
     def evaluate(self):
         (x_train, y_train), (x_test, y_test) = self.data
