@@ -35,7 +35,7 @@ I have implemented the following models:
 | model | training accuracy | training loss | test accuracy | test loss | trained model
 | :----: | :-----: | :----: | :----: | :----: | :----: |
 | DIY Model1 | 99.97% | 0.9100 | 78.81% | No Record | https://pan.baidu.com/s/1o7NhJ1w |
-| DIY Model2 | 100.00% | 0.6700 | 78.81% | No Record | https://pan.baidu.com/s/1eRUjFBc |
+| DIY Model2 | 100.00% | 0.6700 | 74.70% | No Record | https://pan.baidu.com/s/1eRUjFBc |
 | LeCun Net | 58.48% | 1.6422 | 53.69% | 2.1783 | https://pan.baidu.com/s/1qXKvQPm |
 | NiN | 99.80% | 0.1481 | 93.54% | 0.4095 | https://pan.baidu.com/s/1c1DYCZA |
 | Vgg16 | under exp | under exp | under exp | under exp | pass |
