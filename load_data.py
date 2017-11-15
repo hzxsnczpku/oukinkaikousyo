@@ -48,7 +48,7 @@ def data_load_fir():
     np.save('y_train.npy', y_train)
     np.save('x_test.npy', x_test)
     np.save('y_test.npy', y_test)
-    
+
     return (x_train, y_train), (x_test, y_test)
 
 

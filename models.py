@@ -98,6 +98,7 @@ def get_NiN(cfg):
     if load_model:
         model.load_weights('nin.h5', by_name=True)
 
+    model.summary()
     sgd = optimizers.SGD(lr=.1, momentum=0.9, nesterov=True)
     model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
@@ -912,7 +913,7 @@ def get_SENet(cfg):
                               use_bias=False)(x)
             shortcut = BatchNormalization()(shortcut)
 
-        y = squeeze_excite_block(y)
+        y = squeeze_excite_block(y, planes * expansion)
         y = add([y, shortcut])
         y = Activation('relu')(y)
         return y
@@ -925,9 +926,8 @@ def get_SENet(cfg):
             x = residual_block(x, planes)
         return x
 
-    def squeeze_excite_block(input, ratio=16):
+    def squeeze_excite_block(input, filters, ratio=16):
         init = input
-        filters = init._keras_shape[-1]  # infer input number of filters
         se_shape = (1, 1, filters)
         se = GlobalAveragePooling2D()(init)
         se = Reshape(se_shape)(se)

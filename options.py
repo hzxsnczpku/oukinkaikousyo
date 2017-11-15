@@ -107,6 +107,7 @@ SENET_OPTION = {'name': 'senet',
                 }
 
 OPTIONS = {'LeNet': LENET_OPTION,
+           'NiN': NIN_OPTION,
            'Vgg16': VGG16_OPTION,
            'Vgg19': VGG19_OPTION,
            'ResNet': RESNET_OPTION,
