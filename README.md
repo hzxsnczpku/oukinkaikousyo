@@ -38,7 +38,7 @@ I have implemented the following models:
 | DIY Model2 | 100.00% | 0.6700 | 74.70% | No Record | https://pan.baidu.com/s/1eRUjFBc |
 | LeCun Net | 58.48% | 1.6422 | 53.69% | 2.1783 | https://pan.baidu.com/s/1qXKvQPm |
 | NiN | 99.80% | 0.1481 | 93.54% | 0.4095 | https://pan.baidu.com/s/1c1DYCZA |
-| Vgg16 | under exp | under exp | under exp | under exp | pass |
+| Vgg16 | 96.56% | 0.6324 | 88.89% | 1.1115 | https://pan.baidu.com/s/1i5KQyLf |
 | Vgg19 | 99.75% | 0.6149 | 91.75% | 1.1425 | https://pan.baidu.com/s/1bVDB34 |
 | ResNet | 99.99% | 0.1433 | 96.67% | 0.3012 | https://pan.baidu.com/s/1dEBoKZR |
 | DenseNet | 99.99% | 0.0913 | 98.03% | 0.1904 | https://pan.baidu.com/s/1cAVmJc |
@@ -60,6 +60,11 @@ Below is the data derived from my training process.
 ### NiN
 <div align = 'center'>
 <img src = "https://raw.githubusercontent.com/hzxsnczpku/oukinkaikousyo/master/images/NiN.png" width='600px'>
+</div>
+
+### Vgg16
+<div align = 'center'>
+<img src = "https://raw.githubusercontent.com/hzxsnczpku/oukinkaikousyo/master/images/Vgg16.png" width='600px'>
 </div>
 
 ### Vgg19
