@@ -2,7 +2,7 @@
 
 Here are the codes on some basic cv models and the application of these models on the human face recognization dataset.
 
- The dataset is available at http://pan.baidu.com/s/1ge9iKXP.
+The dataset is available at http://pan.baidu.com/s/1ge9iKXP.
 
 ## The Dataset
 
@@ -34,17 +34,17 @@ I have implemented the following models:
 
 | model | training accuracy | training loss | test accuracy | test loss | trained model
 | :----: | :-----: | :----: | :----: | :----: | :----: |
-| The DIY model | 99.97% | 0.9100 | 78.81% | Not Recorded | https://pan.baidu.com/s/1o7NhJ1w |
+| DIY Model | 99.97% | 0.9100 | 78.81% | No Record | https://pan.baidu.com/s/1o7NhJ1w |
 | LeCun Net | 58.48% | 1.6422 | 53.69% | 2.1783 | https://pan.baidu.com/s/1qXKvQPm |
-| NiN | under experiment | under experiment | under experiment | under experiment | pass |
-| Vgg16 | under experiment | under experiment | under experiment | under experiment | pass |
+| NiN | 99.80% | 0.1481 | 93.54% | 0.4095 | https://pan.baidu.com/s/1c1DYCZA |
+| Vgg16 | under exp | under exp | under exp | under exp | pass |
 | Vgg19 | 99.75% | 0.6149 | 91.75% | 1.1425 | https://pan.baidu.com/s/1bVDB34 |
 | ResNet | 99.99% | 0.1433 | 96.67% | 0.3012 | https://pan.baidu.com/s/1dEBoKZR |
 | DenseNet | 99.99% | 0.0913 | 98.03% | 0.1904 | https://pan.baidu.com/s/1cAVmJc |
-| ResNext | 99.99% | 0.0734 | 98.42% | 0.1585 | pass |
+| ResNext | 99.99% | 0.0734 | 98.42% | 0.1585 | https://pan.baidu.com/s/1misZTOW |
 | Xception | 99.98% | 0.0904 | 93.32% | 0.4085 | https://pan.baidu.com/s/1hrZ5meC |
-| InceptionV3 | uncompatible | uncompatible | uncompatible | uncompatible | pass |
-| SENet | under experiment | under experiment | under experiment | under experiment | pass |
+| InceptionV3 | uncompatible | uncompatible | uncompatible | uncompatible |  |
+| SENet | under exp | under exp | under exp | under exp | pass |
 
 
 ## Training Process
@@ -54,6 +54,11 @@ Below is the data derived from my training process.
 ### LeNet
 <div align = 'center'>
 <img src = "https://raw.githubusercontent.com/hzxsnczpku/oukinkaikousyo/master/images/LeNet.png" width='600px'>
+</div>
+
+### NiN
+<div align = 'center'>
+<img src = "https://raw.githubusercontent.com/hzxsnczpku/oukinkaikousyo/master/images/NiN.png" width='600px'>
 </div>
 
 ### Vgg19
