@@ -977,4 +977,5 @@ MODELS = {'LeNet': get_LeNet,
           'ResNext': get_ResNext,
           'Xception': get_Xception,
           'InceptionV3': get_InceptionV3,
+          'SENet': get_SENet,
           }
