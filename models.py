@@ -183,7 +183,7 @@ def get_Vgg16(cfg):
 
     model.add(Flatten(name='flatten'))
     model.add(Dense(4096, use_bias=True, kernel_regularizer=keras.regularizers.l2(weight_decay),
-                    kernel_initializer=he_normal(), name='fc1'))
+                    kernel_initializer=he_normal(), name='fc'))
     model.add(BatchNormalization())
     model.add(Activation('relu'))
     model.add(Dropout(dropout))
@@ -202,6 +202,9 @@ def get_Vgg16(cfg):
         model.load_weights(filepath, by_name=True)
     else:
         model.load_weights('vgg16.h5', by_name=True)
+
+    sgd = optimizers.SGD(lr=.1, momentum=0.9, nesterov=True)
+    model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
     return model
 
