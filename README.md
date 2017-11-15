@@ -41,9 +41,9 @@ I have implemented the following models:
 | Vgg19 | 99.75% | 0.6149 | 91.75% | 1.1425 | https://pan.baidu.com/s/1bVDB34 |
 | ResNet | 99.99% | 0.1433 | 96.67% | 0.3012 | https://pan.baidu.com/s/1dEBoKZR |
 | DenseNet | 99.99% | 0.0913 | 98.03% | 0.1904 | https://pan.baidu.com/s/1cAVmJc |
-| ResNext | 99.99% | 0.0734 | 98.42 | 0.1585 | pass |
-| Xception | 99.98% | 0.0904 | 93.32 | 0.4085% | https://pan.baidu.com/s/1hrZ5meC |
-| InceptionV3 | uncompatible | not compatible | not compatible | not compatible | pass |
+| ResNext | 99.99% | 0.0734 | 98.42% | 0.1585 | pass |
+| Xception | 99.98% | 0.0904 | 93.32% | 0.4085 | https://pan.baidu.com/s/1hrZ5meC |
+| InceptionV3 | uncompatible | uncompatible | uncompatible | uncompatible | pass |
 | SENet | under experiment | under experiment | under experiment | under experiment | pass |
 
 
