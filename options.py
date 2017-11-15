@@ -6,6 +6,17 @@ LENET_OPTION = {'name': 'lenet',
                 'scheduler': [(60, 0.05), (120, 0.01), (160, 0.002), (200, 0.004)],
                 }
 
+NIN_OPTION = {'name': 'nin',
+              'dropout': 0.5,
+              'weight_decay': 0.0005,
+              'WEIGHTS_PATH': 'https://github.com/fchollet/deep-learning-models/releases/download/v0.1/vgg16_weights_tf_dim_ordering_tf_kernels.h5',
+              'batch_size': 128,
+              'epochs': 200,
+              'iterations': 391,
+              'log_filepath': r'./nin/',
+              'scheduler': [(60, 0.05), (120, 0.01), (160, 0.002), (200, 0.004)],
+              }
+
 VGG16_OPTION = {'name': 'vgg16',
                 'dropout': 0.5,
                 'weight_decay': 0.0005,
@@ -82,6 +93,19 @@ INCEPTIONV3_OPTION = {'name': 'inceptionv3',
                       'scheduler': [(75, 0.05), (150, 0.005), (210, 0.0005), (250, 0.0001)],
                       }
 
+SENET_OPTION = {'name': 'senet',
+                'weight_decay': 0.0005,
+                'batch_size': 64,
+                'epochs': 250,
+                'iterations': 781,
+                'cardinality': 4,
+                'base_width': 64,
+                'inplanes': 64,
+                'expansion': 4,
+                'log_filepath': r'./senet/',
+                'scheduler': [(75, 0.05), (150, 0.005), (210, 0.0005), (250, 0.0001)],
+                }
+
 OPTIONS = {'LeNet': LENET_OPTION,
            'Vgg16': VGG16_OPTION,
            'Vgg19': VGG19_OPTION,
@@ -90,4 +114,5 @@ OPTIONS = {'LeNet': LENET_OPTION,
            'ResNext': RESNEXT_OPTION,
            'Xception': XCEPTION_OPTION,
            'InceptionV3': INCEPTIONV3_OPTION,
+           'SENet': SENET_OPTION,
            }

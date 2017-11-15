@@ -3,7 +3,7 @@ import math
 from tensorflow.contrib.keras.python import keras
 from tensorflow.contrib.keras.python.keras import optimizers
 from tensorflow.contrib.keras.python.keras import regularizers
-from tensorflow.contrib.keras.python.keras.initializers import he_normal
+from tensorflow.contrib.keras.python.keras.initializers import he_normal, RandomNormal
 from tensorflow.contrib.keras.python.keras.layers import Conv2D, MaxPooling2D, Dense, Dropout, Activation, Flatten, \
     Input, add, GlobalAveragePooling2D, AveragePooling2D, Lambda, SeparableConv2D, GlobalMaxPooling2D, concatenate, \
     Reshape, multiply
@@ -32,6 +32,71 @@ def get_LeNet(cfg):
 
     if load_model:
         model.load_weights('lenet.h5', by_name=True)
+
+    sgd = optimizers.SGD(lr=.1, momentum=0.9, nesterov=True)
+    model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
+
+    return model
+
+
+def get_NiN(cfg):
+    load_model = cfg['load_model']
+    input_shape = cfg['input_shape']
+    dropout = cfg['dropout']
+    num_classes = cfg['num_classes']
+
+    model = Sequential()
+
+    model.add(Conv2D(192, (5, 5), padding='same', kernel_regularizer=keras.regularizers.l2(0.0001),
+                     kernel_initializer=RandomNormal(stddev=0.01), input_shape=input_shape))
+    model.add(BatchNormalization())
+    model.add(Activation('relu'))
+    model.add(Conv2D(160, (1, 1), padding='same', kernel_regularizer=keras.regularizers.l2(0.0001),
+                     kernel_initializer=RandomNormal(stddev=0.05)))
+    model.add(BatchNormalization())
+    model.add(Activation('relu'))
+    model.add(Conv2D(96, (1, 1), padding='same', kernel_regularizer=keras.regularizers.l2(0.0001),
+                     kernel_initializer=RandomNormal(stddev=0.05)))
+    model.add(BatchNormalization())
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(3, 3), strides=(2, 2), padding='same'))
+
+    model.add(Dropout(dropout))
+
+    model.add(Conv2D(192, (5, 5), padding='same', kernel_regularizer=keras.regularizers.l2(0.0001),
+                     kernel_initializer=RandomNormal(stddev=0.05)))
+    model.add(BatchNormalization())
+    model.add(Activation('relu'))
+    model.add(Conv2D(192, (1, 1), padding='same', kernel_regularizer=keras.regularizers.l2(0.0001),
+                     kernel_initializer=RandomNormal(stddev=0.05)))
+    model.add(BatchNormalization())
+    model.add(Activation('relu'))
+    model.add(Conv2D(192, (1, 1), padding='same', kernel_regularizer=keras.regularizers.l2(0.0001),
+                     kernel_initializer=RandomNormal(stddev=0.05)))
+    model.add(BatchNormalization())
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(3, 3), strides=(2, 2), padding='same'))
+
+    model.add(Dropout(dropout))
+
+    model.add(Conv2D(192, (3, 3), padding='same', kernel_regularizer=keras.regularizers.l2(0.0001),
+                     kernel_initializer=RandomNormal(stddev=0.05)))
+    model.add(BatchNormalization())
+    model.add(Activation('relu'))
+    model.add(Conv2D(192, (1, 1), padding='same', kernel_regularizer=keras.regularizers.l2(0.0001),
+                     kernel_initializer=RandomNormal(stddev=0.05)))
+    model.add(BatchNormalization())
+    model.add(Activation('relu'))
+    model.add(Conv2D(num_classes, (1, 1), padding='same', kernel_regularizer=keras.regularizers.l2(0.0001),
+                     kernel_initializer=RandomNormal(stddev=0.05)))
+    model.add(BatchNormalization())
+    model.add(Activation('relu'))
+
+    model.add(GlobalAveragePooling2D())
+    model.add(Activation('softmax'))
+
+    if load_model:
+        model.load_weights('nin.h5', by_name=True)
 
     sgd = optimizers.SGD(lr=.1, momentum=0.9, nesterov=True)
     model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
@@ -890,10 +955,21 @@ def get_SENet(cfg):
     x = residual_layer(x, 3, 256, stride=(2, 2))
     x = GlobalAveragePooling2D()(x)
     x = dense_layer(x)
-    return x
+
+    model = Model(img_input, x)
+    model.summary()
+
+    if load_model:
+        model.load_weights('senet.h5')
+
+    sgd = optimizers.SGD(lr=.1, momentum=0.9, nesterov=True)
+    model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
+
+    return model
 
 
 MODELS = {'LeNet': get_LeNet,
+          'NiN': get_NiN,
           'Vgg16': get_Vgg16,
           'Vgg19': get_Vgg19,
           'ResNet': get_ResNet,

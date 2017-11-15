@@ -19,11 +19,15 @@ The dataset consists of 62928 pictures with 3 channels, which are of the size 31
 I have implemented the following models:
 
  * A DIY model (I don't give the code of this model since it is written by my classmate and I'm not sure whether he would be happy if I did so)
+ * Network in Network
+ * Vgg16
  * Vgg19
  * ResNet
  * DenseNet
  * ResNext
  * Xception
+ * InceptionV3
+ * SENet
 
 
 ## Experiment results
@@ -32,6 +36,7 @@ I have implemented the following models:
 | :----: | :-----: | :----: | :----: | :----: | :----: |
 | The DIY model | 99.97% | 0.9100 | 78.81% | Not Recorded | https://pan.baidu.com/s/1o7NhJ1w |
 | LeCun Net | 58.48% | 1.6422 | 53.69% | 2.1783 | https://pan.baidu.com/s/1qXKvQPm |
+| NiN | under experiment | under experiment | under experiment | under experiment | pass |
 | Vgg16 | under experiment | under experiment | under experiment | under experiment | pass |
 | Vgg19 | 99.75% | 0.6149 | 91.75% | 1.1425 | https://pan.baidu.com/s/1bVDB34 |
 | ResNet | 99.99% | 0.1433 | 96.67% | 0.3012 | https://pan.baidu.com/s/1dEBoKZR |
