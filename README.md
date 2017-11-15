@@ -30,10 +30,11 @@ I have implemented the following models:
 
 | model | training accuracy | training loss | test accuracy | test loss | trained model
 | :----: | :-----: | :----: | :----: | :----: | :----: |
-| The diy model | 99.97% | 0.9100 | 78.81% | Not Recorded | https://pan.baidu.com/s/1o7NhJ1w |
+| The DIY model | 99.97% | 0.9100 | 78.81% | Not Recorded | https://pan.baidu.com/s/1o7NhJ1w |
+| LeCun Net | under experiment | under experiment | under experiment | under experiment | pass |
 | Vgg19 | 99.75% | 0.6149 | 91.75% | 1.1425 | https://pan.baidu.com/s/1bVDB34 |
 | ResNet | 99.99% | 0.1433 | 96.67% | 0.3012 | https://pan.baidu.com/s/1dEBoKZR |
-| DenseNet | under experiment | under experiment | under experiment | under experiment | pass |
+| DenseNet | 99.99% | 0.0913 | 98.03% | 0.1904 | https://pan.baidu.com/s/1cAVmJc |
 | ResNext | under experiment | under experiment | under experiment | under experiment | pass |
 
 ## Training Process
@@ -48,6 +49,11 @@ Below is the data derived from my training process.
 ### ResNet
 <div align = 'center'>
 <img src = "https://raw.githubusercontent.com/hzxsnczpku/oukinkaikousyo/master/images/ResNet.png" width='600px'>
+</div>
+
+### DenseNet
+<div align = 'center'>
+<img src = "https://raw.githubusercontent.com/hzxsnczpku/oukinkaikousyo/master/images/DenseNet.png" width='600px'>
 </div>
 
 # How to Reproduce
