@@ -39,4 +39,4 @@ if __name__ == '__main__':
     if cfg['mode'] == 'train':
         train(data, model, cfg)
     else:
-        model.evaluate(data, model)
+        evaluate(data, model)

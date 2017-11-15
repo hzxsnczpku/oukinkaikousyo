@@ -1,21 +1,32 @@
-LENET_OPTION = {'name': 'LeNet',
+LENET_OPTION = {'name': 'lenet',
                 'batch_size': 128,
                 'epochs': 200,
                 'iterations': 391,
-                'log_filepath': r'./lenet19/',
+                'log_filepath': r'./lenet/',
                 'scheduler': [(60, 0.05), (120, 0.01), (160, 0.002), (200, 0.004)],
                 }
 
-VGG_OPTION = {'name': 'vgg19',
-              'dropout': 0.5,
-              'weight_decay': 0.0005,
-              'WEIGHTS_PATH': 'https://github.com/fchollet/deep-learning-models/releases/download/v0.1/vgg19_weights_tf_dim_ordering_tf_kernels.h5',
-              'batch_size': 128,
-              'epochs': 200,
-              'iterations': 391,
-              'log_filepath': r'./vgg19/',
-              'scheduler': [(60, 0.05), (120, 0.01), (160, 0.002), (200, 0.004)],
-              }
+VGG16_OPTION = {'name': 'vgg16',
+                'dropout': 0.5,
+                'weight_decay': 0.0005,
+                'WEIGHTS_PATH': 'https://github.com/fchollet/deep-learning-models/releases/download/v0.1/vgg16_weights_tf_dim_ordering_tf_kernels.h5',
+                'batch_size': 128,
+                'epochs': 200,
+                'iterations': 391,
+                'log_filepath': r'./vgg16/',
+                'scheduler': [(60, 0.05), (120, 0.01), (160, 0.002), (200, 0.004)],
+                }
+
+VGG19_OPTION = {'name': 'vgg19',
+                'dropout': 0.5,
+                'weight_decay': 0.0005,
+                'WEIGHTS_PATH': 'https://github.com/fchollet/deep-learning-models/releases/download/v0.1/vgg19_weights_tf_dim_ordering_tf_kernels.h5',
+                'batch_size': 128,
+                'epochs': 200,
+                'iterations': 391,
+                'log_filepath': r'./vgg19/',
+                'scheduler': [(60, 0.05), (120, 0.01), (160, 0.002), (200, 0.004)],
+                }
 
 RESNET_OPTION = {'name': 'resnet',
                  'weight_decay': 0.0005,
@@ -62,5 +73,21 @@ XCEPTION_OPTION = {'name': 'xception',
                    'scheduler': [(75, 0.05), (150, 0.005), (210, 0.0005), (250, 0.0001)],
                    }
 
-OPTIONS = {'LeNet': LENET_OPTION, 'Vgg19': VGG_OPTION, 'ResNet': RESNET_OPTION, 'DenseNet': DENSENET_OPTION, 'ResNext': RESNEXT_OPTION,
-           'Xception': XCEPTION_OPTION}
+INCEPTIONV3_OPTION = {'name': 'inceptionv3',
+                      'weight_decay': 0.0005,
+                      'batch_size': 120,
+                      'epochs': 250,
+                      'iterations': 417,
+                      'log_filepath': r'./inception/',
+                      'scheduler': [(75, 0.05), (150, 0.005), (210, 0.0005), (250, 0.0001)],
+                      }
+
+OPTIONS = {'LeNet': LENET_OPTION,
+           'Vgg16': VGG16_OPTION,
+           'Vgg19': VGG19_OPTION,
+           'ResNet': RESNET_OPTION,
+           'DenseNet': DENSENET_OPTION,
+           'ResNext': RESNEXT_OPTION,
+           'Xception': XCEPTION_OPTION,
+           'InceptionV3': INCEPTIONV3_OPTION,
+           }
