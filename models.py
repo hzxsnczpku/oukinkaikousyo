@@ -485,7 +485,7 @@ def get_DenseNet(cfg):
 
     sgd = optimizers.SGD(lr=.1, momentum=0.9, nesterov=True)
     model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
-    
+
     return model
 
 

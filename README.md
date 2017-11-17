@@ -45,7 +45,7 @@ I have implemented the following models:
 | ResNext | 99.99% | 0.0734 | 98.42% | 0.1585 | https://pan.baidu.com/s/1misZTOW |
 | Xception | 99.98% | 0.0904 | 93.32% | 0.4085 | https://pan.baidu.com/s/1hrZ5meC |
 | InceptionV3 | uncompatible | uncompatible | uncompatible | uncompatible |  |
-| SENet | under exp | under exp | under exp | under exp | pass |
+| SENet | 99.98% | 0.0989 | 98.38% | 0.1782 | https://pan.baidu.com/s/1mikmAZA |
 
 
 ## Training Process
@@ -90,6 +90,11 @@ Below is the data derived from my training process.
 ### Xception
 <div align = 'center'>
 <img src = "https://raw.githubusercontent.com/hzxsnczpku/oukinkaikousyo/master/images/Xception.png" width='600px'>
+</div>
+
+### SENet
+<div align = 'center'>
+<img src = "https://raw.githubusercontent.com/hzxsnczpku/oukinkaikousyo/master/images/SENet.png" width='600px'>
 </div>
 
 # How to Reproduce
