@@ -416,7 +416,7 @@ def get_DenseNet(cfg):
     num_classes = cfg['num_classes']
     input_shape = cfg['input_shape']
 
-    growth_rate = cfg['growth_rate ']
+    growth_rate = cfg['growth_rate']
     depth = cfg['depth']
     compression = cfg['compression']
 
@@ -485,6 +485,8 @@ def get_DenseNet(cfg):
 
     sgd = optimizers.SGD(lr=.1, momentum=0.9, nesterov=True)
     model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
+    
+    return model
 
 
 def get_ResNext(cfg):
